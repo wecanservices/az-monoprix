@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <defs>
+    <linearGradient id="c10bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ECFCCB"/><stop offset="100%" stop-color="#BEF264"/></linearGradient>
+  </defs>
+  <circle cx="60" cy="60" r="55" fill="url(#c10bg)"/>
+  <!-- Spray bottle -->
+  <path d="M50 45 L50 55 L45 55 L45 100 L75 100 L75 55 L70 55 L70 45 Z" fill="#84CC16"/>
+  <path d="M55 42 L55 48 L65 48 L65 42 Z" fill="#65A30D"/>
+  <path d="M65 42 L78 38 L78 32 L65 36 Z" fill="#65A30D"/>
+  <!-- Trigger -->
+  <path d="M65 48 L78 55 L82 60 L75 58 Z" fill="#65A30D"/>
+  <!-- Spray drops -->
+  <circle cx="88" cy="45" r="2" fill="#84CC16" opacity="0.7"/>
+  <circle cx="94" cy="42" r="1.5" fill="#84CC16" opacity="0.6"/>
+  <circle cx="92" cy="52" r="1.5" fill="#84CC16" opacity="0.5"/>
+  <!-- Label -->
+  <rect x="48" y="70" width="24" height="18" fill="#FEF3C7"/>
+</svg>

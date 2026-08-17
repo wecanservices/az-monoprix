@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <defs>
+    <linearGradient id="c6bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#CFFAFE"/><stop offset="100%" stop-color="#67E8F9"/></linearGradient>
+    <linearGradient id="c6drink" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F97316"/><stop offset="100%" stop-color="#EA580C"/></linearGradient>
+  </defs>
+  <circle cx="60" cy="60" r="55" fill="url(#c6bg)"/>
+  <!-- Cup -->
+  <path d="M42 40 L78 40 L74 100 L46 100 Z" fill="#fff" stroke="#0891B2" stroke-width="2"/>
+  <path d="M44 45 L76 45 L72 95 L48 95 Z" fill="url(#c6drink)"/>
+  <!-- Straw -->
+  <rect x="58" y="25" width="4" height="30" rx="1" fill="#DC2626"/>
+  <rect x="58" y="25" width="4" height="8" rx="1" fill="#FCA5A5"/>
+  <!-- Bubbles -->
+  <circle cx="52" cy="60" r="2" fill="#fff" opacity="0.7"/>
+  <circle cx="65" cy="72" r="1.5" fill="#fff" opacity="0.7"/>
+  <circle cx="58" cy="82" r="1" fill="#fff" opacity="0.7"/>
+</svg>

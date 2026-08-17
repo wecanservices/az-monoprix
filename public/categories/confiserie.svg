@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <defs>
+    <linearGradient id="c7bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FCE7F3"/><stop offset="100%" stop-color="#F9A8D4"/></linearGradient>
+    <linearGradient id="c7choc" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#78350F"/><stop offset="100%" stop-color="#451A03"/></linearGradient>
+  </defs>
+  <circle cx="60" cy="60" r="55" fill="url(#c7bg)"/>
+  <!-- Chocolate bar -->
+  <rect x="35" y="45" width="50" height="35" rx="4" fill="url(#c7choc)" transform="rotate(-8 60 62)"/>
+  <g transform="rotate(-8 60 62)">
+    <line x1="47" y1="45" x2="47" y2="80" stroke="#451A03" stroke-width="1.5"/>
+    <line x1="60" y1="45" x2="60" y2="80" stroke="#451A03" stroke-width="1.5"/>
+    <line x1="73" y1="45" x2="73" y2="80" stroke="#451A03" stroke-width="1.5"/>
+    <line x1="35" y1="62" x2="85" y2="62" stroke="#451A03" stroke-width="1.5"/>
+  </g>
+  <!-- Wrapper -->
+  <path d="M20 55 Q28 50 35 45 L35 80 Q28 78 20 78" fill="#DC2626" transform="rotate(-8 60 62)"/>
+</svg>

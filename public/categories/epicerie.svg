@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <defs>
+    <linearGradient id="c5bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FED7AA"/><stop offset="100%" stop-color="#FB923C"/></linearGradient>
+  </defs>
+  <circle cx="60" cy="60" r="55" fill="url(#c5bg)"/>
+  <!-- Can -->
+  <ellipse cx="60" cy="42" rx="20" ry="6" fill="#DC2626"/>
+  <rect x="40" y="42" width="40" height="50" fill="#DC2626"/>
+  <ellipse cx="60" cy="92" rx="20" ry="6" fill="#B91C1C"/>
+  <!-- Label -->
+  <rect x="43" y="58" width="34" height="18" fill="#FEF3C7"/>
+  <text x="60" y="70" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="8" fill="#DC2626">CONSERVE</text>
+  <rect x="43" y="78" width="34" height="3" fill="#DC2626"/>
+</svg>

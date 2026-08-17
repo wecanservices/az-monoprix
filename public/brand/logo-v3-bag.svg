@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <defs>
+    <linearGradient id="v3bag" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF5A69"/>
+      <stop offset="100%" stop-color="#E30613"/>
+    </linearGradient>
+    <linearGradient id="v3handle" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7A030A"/>
+      <stop offset="100%" stop-color="#E30613"/>
+    </linearGradient>
+  </defs>
+  <!-- Bag body -->
+  <path d="M40 70 Q100 60 160 70 L150 175 Q100 185 50 175 Z"
+        fill="url(#v3bag)"/>
+  <!-- Handle -->
+  <path d="M70 78 Q70 30 100 30 Q130 30 130 78"
+        stroke="url(#v3handle)" stroke-width="10" stroke-linecap="round" fill="none"/>
+  <!-- AZ text on bag -->
+  <text x="100" y="145" text-anchor="middle" font-family="'Inter',sans-serif" font-weight="900" font-size="60" fill="#fff" letter-spacing="-2">AZ</text>
+  <!-- Subtle grocery motif : line -->
+  <line x1="52" y1="160" x2="148" y2="160" stroke="#fff" stroke-width="1.5" opacity="0.5" stroke-dasharray="3 3"/>
+</svg>

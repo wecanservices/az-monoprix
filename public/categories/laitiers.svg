@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <defs>
+    <linearGradient id="c4bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FEF3C7"/><stop offset="100%" stop-color="#FDE68A"/></linearGradient>
+  </defs>
+  <circle cx="60" cy="60" r="55" fill="url(#c4bg)"/>
+  <!-- Milk bottle -->
+  <path d="M50 35 L50 45 Q45 48 45 55 L45 95 Q45 100 50 100 L70 100 Q75 100 75 95 L75 55 Q75 48 70 45 L70 35 Z" fill="#fff" stroke="#F59E0B" stroke-width="2"/>
+  <rect x="50" y="30" width="20" height="8" rx="1" fill="#F59E0B"/>
+  <!-- Label -->
+  <rect x="48" y="65" width="24" height="20" rx="2" fill="#DC2626"/>
+  <text x="60" y="79" text-anchor="middle" font-family="sans-serif" font-weight="900" font-size="9" fill="#fff">LAIT</text>
+</svg>

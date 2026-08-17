@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <defs>
+    <linearGradient id="c12bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FEF3C7"/><stop offset="100%" stop-color="#FCD34D"/></linearGradient>
+  </defs>
+  <circle cx="60" cy="60" r="55" fill="url(#c12bg)"/>
+  <!-- Paw print -->
+  <g transform="translate(60,65)" fill="#78350F">
+    <ellipse cx="0" cy="10" rx="16" ry="14"/>
+    <ellipse cx="-15" cy="-5" rx="6" ry="8"/>
+    <ellipse cx="15" cy="-5" rx="6" ry="8"/>
+    <ellipse cx="-22" cy="10" rx="5" ry="6"/>
+    <ellipse cx="22" cy="10" rx="5" ry="6"/>
+  </g>
+  <!-- Heart on paw -->
+  <path d="M60 68 L57 65 Q55 63 57 61 Q60 60 60 63 Q60 60 63 61 Q65 63 63 65 Z" fill="#EC4899"/>
+</svg>

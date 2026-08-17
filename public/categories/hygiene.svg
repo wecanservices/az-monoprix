@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <defs>
+    <linearGradient id="c9bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F3E8FF"/><stop offset="100%" stop-color="#C4B5FD"/></linearGradient>
+  </defs>
+  <circle cx="60" cy="60" r="55" fill="url(#c9bg)"/>
+  <!-- Bottle -->
+  <rect x="45" y="35" width="30" height="65" rx="4" fill="#fff" stroke="#7C3AED" stroke-width="2"/>
+  <rect x="52" y="28" width="16" height="10" rx="2" fill="#7C3AED"/>
+  <!-- Pump -->
+  <path d="M60 20 L60 30 M55 25 L65 25" stroke="#5B21B6" stroke-width="2" stroke-linecap="round"/>
+  <!-- Label -->
+  <rect x="48" y="55" width="24" height="30" rx="2" fill="#7C3AED"/>
+  <circle cx="60" cy="65" r="4" fill="#fff"/>
+  <path d="M55 75 Q60 78 65 75" stroke="#fff" stroke-width="1.5" fill="none"/>
+</svg>

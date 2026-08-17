@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <defs>
+    <linearGradient id="c8bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#E0F2FE"/><stop offset="100%" stop-color="#7DD3FC"/></linearGradient>
+  </defs>
+  <circle cx="60" cy="60" r="55" fill="url(#c8bg)"/>
+  <!-- Snowflake -->
+  <g transform="translate(60,60)" stroke="#0369A1" stroke-width="3" stroke-linecap="round" fill="none">
+    <line x1="0" y1="-30" x2="0" y2="30"/>
+    <line x1="-30" y1="0" x2="30" y2="0"/>
+    <line x1="-21" y1="-21" x2="21" y2="21"/>
+    <line x1="-21" y1="21" x2="21" y2="-21"/>
+    <path d="M0 -30 L-5 -25 M0 -30 L5 -25"/>
+    <path d="M0 30 L-5 25 M0 30 L5 25"/>
+    <path d="M-30 0 L-25 -5 M-30 0 L-25 5"/>
+    <path d="M30 0 L25 -5 M30 0 L25 5"/>
+  </g>
+  <!-- Small snowflakes -->
+  <circle cx="35" cy="35" r="2" fill="#fff"/>
+  <circle cx="85" cy="35" r="2" fill="#fff"/>
+  <circle cx="35" cy="85" r="2" fill="#fff"/>
+  <circle cx="85" cy="85" r="2" fill="#fff"/>
+</svg>

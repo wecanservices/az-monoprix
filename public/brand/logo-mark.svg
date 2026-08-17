@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 360" fill="none">
+  <!-- Red teardrop pin -->
+  <path d="M140 0
+           C 217 0 280 63 280 140
+           C 280 220 200 320 140 360
+           C 80 320 0 220 0 140
+           C 0 63 63 0 140 0 Z"
+        fill="#DC1A28"/>
+  <circle cx="140" cy="140" r="102" fill="#FFFFFF"/>
+
+  <g transform="translate(140,140)">
+    <!-- Handle -->
+    <path d="M-45 -8 Q-45 -52 0 -52 Q45 -52 45 -8"
+          stroke="#1B4332" stroke-width="6" stroke-linecap="round" fill="none"/>
+    <!-- Baguette -->
+    <g transform="translate(20,-6) rotate(28)">
+      <ellipse cx="0" cy="0" rx="8" ry="32" fill="#E4A960"/>
+      <path d="M-3 -22 L-5 -12 M-3 -8 L-5 2 M-3 14 L-5 22" stroke="#B87B2E" stroke-width="1.2" stroke-linecap="round"/>
+    </g>
+    <!-- Bottle -->
+    <g transform="translate(-2,-8)">
+      <rect x="-6" y="-30" width="12" height="10" rx="1" fill="#7A030A"/>
+      <path d="M-9 -20 Q-9 -14 -12 -8 L-12 20 Q-12 26 -6 26 L6 26 Q12 26 12 20 L12 -8 Q9 -14 9 -20 Z"
+            fill="#B91C1C"/>
+      <rect x="-8" y="0" width="16" height="10" fill="#FEF3C7"/>
+    </g>
+    <!-- Leaves -->
+    <g transform="translate(-30,-14) rotate(-18)">
+      <path d="M0 0 Q-8 -14 -18 -10 Q-14 4 0 6 Q-14 12 -20 24 Q-6 22 4 12 Q10 22 20 20 Q14 6 0 4 Q10 -6 12 -22 Q0 -14 0 0 Z"
+            fill="#22C55E"/>
+    </g>
+    <!-- Basket wire grid -->
+    <g stroke="#1B4332" stroke-width="4" stroke-linecap="round" fill="none">
+      <path d="M-52 -8 L-46 44 Q-42 52 -34 52 L34 52 Q42 52 46 44 L52 -8 Z"/>
+      <line x1="-52" y1="-8" x2="52" y2="-8"/>
+      <line x1="-50" y1="12" x2="50" y2="12"/>
+      <line x1="-46" y1="32" x2="46" y2="32"/>
+      <g stroke-width="2.5">
+        <line x1="-38" y1="-8" x2="-34" y2="52"/>
+        <line x1="-24" y1="-8" x2="-22" y2="52"/>
+        <line x1="-10" y1="-8" x2="-9" y2="52"/>
+        <line x1="4" y1="-8" x2="4" y2="52"/>
+        <line x1="18" y1="-8" x2="17" y2="52"/>
+        <line x1="32" y1="-8" x2="30" y2="52"/>
+        <line x1="46" y1="-8" x2="42" y2="52"/>
+      </g>
+    </g>
+  </g>
+</svg>

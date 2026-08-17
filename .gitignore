@@ -1,6 +1,8 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# ============================================================
+# AZ MONOPRIX — .gitignore
+# ============================================================
 
-# dependencies
+# Dependencies
 /node_modules
 /.pnp
 .pnp.*
@@ -10,32 +12,54 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
+# Testing
 /coverage
 
-# next.js
+# Next.js
 /.next/
 /out/
+next-env.d.ts
 
-# production
+# Production builds
 /build
 
-# misc
-.DS_Store
-*.pem
+# TypeScript incremental
+*.tsbuildinfo
 
-# debug
+# Env files — never commit real secrets
+.env
+.env.local
+.env.*.local
+.env.production
+!.env.local.example
+
+# Supabase local runtime
+/supabase/.temp
+/supabase/.branches
+
+# OS
+.DS_Store
+Thumbs.db
+*.pem
+*.bak
+*.swp
+
+# Debug logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
-
-# vercel
+# Vercel
 .vercel
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# IDE
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Claude / Cursor tooling (personnel)
+.cursor/

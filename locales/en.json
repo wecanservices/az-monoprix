@@ -1,0 +1,98 @@
+{
+  "app": {
+    "name": "AZ Monoprix",
+    "tagline": "Your groceries, at your door."
+  },
+  "nav": {
+    "home": "Home",
+    "categories": "Categories",
+    "cart": "Cart",
+    "orders": "Orders",
+    "profile": "Profile",
+    "search": "Search",
+    "favorites": "Favorites",
+    "promotions": "Promotions",
+    "loyalty": "Loyalty",
+    "chat": "Chat",
+    "aiShopping": "Shopping Assistant"
+  },
+  "client": {
+    "home": {
+      "hello": "Hello",
+      "deliverTo": "Deliver to",
+      "searchPlaceholder": "What are you looking for?",
+      "sections": {
+        "promotions": "Promotions",
+        "categories": "Categories",
+        "topSellers": "Best sellers",
+        "reorder": "Buy again",
+        "foryou": "For you",
+        "new": "New arrivals",
+        "popular": "Popular",
+        "daily": "Deals of the day",
+        "lists": "My lists",
+        "aiHelper": "Shopping Assistant"
+      }
+    },
+    "cart": {
+      "title": "My cart",
+      "empty": "Your cart is empty.",
+      "subtotal": "Subtotal",
+      "delivery": "Delivery",
+      "total": "Total",
+      "checkout": "Checkout"
+    }
+  },
+  "driver": {
+    "status": { "online": "Online", "offline": "Offline" },
+    "missions": {
+      "empty": "No missions right now.",
+      "accept": "Accept",
+      "refuse": "Refuse"
+    }
+  },
+  "admin": {
+    "dashboard": "Dashboard",
+    "orders": "Orders",
+    "products": "Products",
+    "inventory": "Inventory",
+    "stores": "Stores",
+    "drivers": "Drivers",
+    "customers": "Customers",
+    "promotions": "Promotions",
+    "analytics": "Analytics",
+    "settings": "Settings"
+  },
+  "auth": {
+    "login": {
+      "title": "Sign in",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign in",
+      "noAccount": "No account yet?",
+      "signup": "Create one"
+    },
+    "signup": { "title": "Create account", "submit": "Create my account" },
+    "otp": {
+      "title": "Verification",
+      "sent": "We sent you a code by SMS.",
+      "submit": "Verify"
+    }
+  },
+  "common": {
+    "loading": "Loading…",
+    "empty": "Nothing to show.",
+    "error": "Something went wrong.",
+    "retry": "Retry",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "search": "Search"
+  },
+  "currency": { "dzd": "DA" }
+}

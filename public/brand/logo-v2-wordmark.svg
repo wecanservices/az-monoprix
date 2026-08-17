@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 140" fill="none">
+  <defs>
+    <linearGradient id="v2grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E30613"/>
+      <stop offset="100%" stop-color="#7A030A"/>
+    </linearGradient>
+  </defs>
+  <!-- Emblème : A stylisé + bâche courbe -->
+  <g transform="translate(20,20)">
+    <circle cx="50" cy="50" r="50" fill="url(#v2grad)"/>
+    <path d="M50 22 L74 78 L64 78 L58 62 L42 62 L36 78 L26 78 Z M46 52 L54 52 L50 40 Z"
+          fill="#fff"/>
+    <path d="M28 88 Q50 96 72 88" stroke="#fff" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.9"/>
+  </g>
+  <!-- Wordmark -->
+  <g transform="translate(140,0)">
+    <text x="0" y="65" font-family="'Inter',sans-serif" font-weight="900" font-size="46" fill="#101418" letter-spacing="-1.5">AZ</text>
+    <text x="70" y="65" font-family="'Inter',sans-serif" font-weight="300" font-size="46" fill="#101418" letter-spacing="-1">Monoprix</text>
+    <text x="0" y="92" font-family="'Inter',sans-serif" font-weight="500" font-size="12" fill="#6B7280" letter-spacing="6">SUPERMARCHÉ PREMIUM</text>
+  </g>
+</svg>

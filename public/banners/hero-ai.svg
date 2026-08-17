@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320" fill="none" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="ai-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7A030A"/>
+      <stop offset="50%" stop-color="#E30613"/>
+      <stop offset="100%" stop-color="#FF6A00"/>
+    </linearGradient>
+    <radialGradient id="ai-glow" cx="0.7" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="ai-blur"><feGaussianBlur stdDeviation="20"/></filter>
+  </defs>
+  <rect width="800" height="320" fill="url(#ai-bg)"/>
+  <rect width="800" height="320" fill="url(#ai-glow)"/>
+  <!-- Sparkles cluster -->
+  <g transform="translate(560,160)">
+    <g opacity="0.9">
+      <path d="M0 -60 L8 -8 L60 0 L8 8 L0 60 L-8 8 L-60 0 L-8 -8 Z" fill="#fff"/>
+    </g>
+    <g transform="translate(60,-50) scale(0.5)" opacity="0.85">
+      <path d="M0 -60 L8 -8 L60 0 L8 8 L0 60 L-8 8 L-60 0 L-8 -8 Z" fill="#FBBF24"/>
+    </g>
+    <g transform="translate(-70,40) scale(0.4)" opacity="0.85">
+      <path d="M0 -60 L8 -8 L60 0 L8 8 L0 60 L-8 8 L-60 0 L-8 -8 Z" fill="#fff"/>
+    </g>
+    <g transform="translate(70,60) scale(0.35)" opacity="0.9">
+      <path d="M0 -60 L8 -8 L60 0 L8 8 L0 60 L-8 8 L-60 0 L-8 -8 Z" fill="#FEF3C7"/>
+    </g>
+  </g>
+  <!-- Glow behind sparkles -->
+  <circle cx="560" cy="160" r="80" fill="#fff" opacity="0.2" filter="url(#ai-blur)"/>
+  <!-- Text -->
+  <text x="60" y="120" font-family="'Inter',sans-serif" font-weight="800" font-size="16" fill="#FEF3C7" letter-spacing="4">NOUVEAU</text>
+  <text x="60" y="170" font-family="'Inter',sans-serif" font-weight="900" font-size="46" fill="#fff" letter-spacing="-1.5">Assistant Courses IA</text>
+  <text x="60" y="215" font-family="'Inter',sans-serif" font-weight="400" font-size="18" fill="#fff" opacity="0.92">Décris ton besoin, on prépare ton panier.</text>
+  <rect x="60" y="240" width="200" height="42" rx="21" fill="#fff"/>
+  <text x="160" y="267" text-anchor="middle" font-family="'Inter',sans-serif" font-weight="700" font-size="14" fill="#E30613">✨ Essayer maintenant</text>
+</svg>

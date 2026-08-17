@@ -1,0 +1,98 @@
+{
+  "app": {
+    "name": "AZ Monoprix",
+    "tagline": "مشترياتك، إلى بابك."
+  },
+  "nav": {
+    "home": "الرئيسية",
+    "categories": "الفئات",
+    "cart": "السلة",
+    "orders": "الطلبات",
+    "profile": "الحساب",
+    "search": "بحث",
+    "favorites": "المفضلة",
+    "promotions": "العروض",
+    "loyalty": "الولاء",
+    "chat": "المحادثة",
+    "aiShopping": "مساعد التسوق"
+  },
+  "client": {
+    "home": {
+      "hello": "مرحباً",
+      "deliverTo": "التوصيل إلى",
+      "searchPlaceholder": "ماذا تبحث؟",
+      "sections": {
+        "promotions": "العروض",
+        "categories": "الفئات",
+        "topSellers": "الأكثر مبيعاً",
+        "reorder": "أعد الشراء",
+        "foryou": "لك",
+        "new": "الجديد",
+        "popular": "الأكثر شعبية",
+        "daily": "عروض اليوم",
+        "lists": "قوائمي",
+        "aiHelper": "مساعد التسوق"
+      }
+    },
+    "cart": {
+      "title": "سلتي",
+      "empty": "سلتك فارغة.",
+      "subtotal": "المجموع الفرعي",
+      "delivery": "التوصيل",
+      "total": "الإجمالي",
+      "checkout": "إتمام الشراء"
+    }
+  },
+  "driver": {
+    "status": { "online": "متصل", "offline": "غير متصل" },
+    "missions": {
+      "empty": "لا توجد مهام حالياً.",
+      "accept": "قبول",
+      "refuse": "رفض"
+    }
+  },
+  "admin": {
+    "dashboard": "لوحة التحكم",
+    "orders": "الطلبات",
+    "products": "المنتجات",
+    "inventory": "المخزون",
+    "stores": "المتاجر",
+    "drivers": "السائقون",
+    "customers": "العملاء",
+    "promotions": "العروض",
+    "analytics": "التحليلات",
+    "settings": "الإعدادات"
+  },
+  "auth": {
+    "login": {
+      "title": "تسجيل الدخول",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "submit": "تسجيل الدخول",
+      "noAccount": "ليس لديك حساب؟",
+      "signup": "إنشاء حساب"
+    },
+    "signup": { "title": "إنشاء حساب", "submit": "إنشاء حسابي" },
+    "otp": {
+      "title": "التحقق",
+      "sent": "أرسلنا لك رمزاً عبر الرسائل القصيرة.",
+      "submit": "تحقق"
+    }
+  },
+  "common": {
+    "loading": "جاري التحميل…",
+    "empty": "لا شيء للعرض.",
+    "error": "حدث خطأ.",
+    "retry": "إعادة المحاولة",
+    "cancel": "إلغاء",
+    "confirm": "تأكيد",
+    "save": "حفظ",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "close": "إغلاق",
+    "back": "رجوع",
+    "next": "التالي",
+    "search": "بحث"
+  },
+  "currency": { "dzd": "د.ج" }
+}

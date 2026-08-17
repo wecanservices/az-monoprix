@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320" fill="none" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="drive-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#1E40AF"/>
+    </linearGradient>
+    <linearGradient id="drive-road" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1E40AF"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="320" fill="url(#drive-bg)"/>
+  <!-- Road perspective -->
+  <path d="M350 320 L450 320 L520 180 L480 180 Z" fill="url(#drive-road)" opacity="0.8"/>
+  <line x1="400" y1="320" x2="500" y2="180" stroke="#FCD34D" stroke-width="2" stroke-dasharray="8 8" opacity="0.7"/>
+  <!-- Car icon simplified -->
+  <g transform="translate(560,200)">
+    <rect x="-45" y="-8" width="90" height="30" rx="6" fill="#E30613"/>
+    <path d="M-40 -8 L-25 -28 L25 -28 L40 -8 Z" fill="#FF5A69"/>
+    <rect x="-30" y="-24" width="20" height="14" rx="2" fill="#93C5FD" opacity="0.85"/>
+    <rect x="10" y="-24" width="20" height="14" rx="2" fill="#93C5FD" opacity="0.85"/>
+    <circle cx="-25" cy="26" r="8" fill="#101418"/>
+    <circle cx="25" cy="26" r="8" fill="#101418"/>
+    <circle cx="-25" cy="26" r="3" fill="#6B7280"/>
+    <circle cx="25" cy="26" r="3" fill="#6B7280"/>
+  </g>
+  <!-- Text -->
+  <text x="60" y="120" font-family="'Inter',sans-serif" font-weight="800" font-size="16" fill="#60A5FA" letter-spacing="5">SERVICE DRIVE</text>
+  <text x="60" y="170" font-family="'Inter',sans-serif" font-weight="900" font-size="46" fill="#fff" letter-spacing="-1.5">Vos courses prêtes,</text>
+  <text x="60" y="215" font-family="'Inter',sans-serif" font-weight="900" font-size="46" fill="#FCD34D" letter-spacing="-1.5">on charge la voiture.</text>
+  <text x="60" y="250" font-family="'Inter',sans-serif" font-weight="400" font-size="16" fill="#fff" opacity="0.85">Créneau de 30 min · sans descendre</text>
+</svg>

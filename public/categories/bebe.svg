@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <defs>
+    <linearGradient id="c11bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FCE7F3"/><stop offset="100%" stop-color="#FBCFE8"/></linearGradient>
+  </defs>
+  <circle cx="60" cy="60" r="55" fill="url(#c11bg)"/>
+  <!-- Baby bottle -->
+  <path d="M50 35 L50 42 Q47 45 47 50 L47 92 Q47 100 55 100 L65 100 Q73 100 73 92 L73 50 Q73 45 70 42 L70 35 Z" fill="#fff" stroke="#EC4899" stroke-width="2"/>
+  <rect x="50" y="28" width="20" height="10" rx="2" fill="#EC4899"/>
+  <!-- Nipple -->
+  <ellipse cx="60" cy="26" rx="6" ry="4" fill="#FBCFE8"/>
+  <!-- Level -->
+  <path d="M50 65 L70 65 L70 90 L50 90 Z" fill="#FBCFE8" opacity="0.6"/>
+  <!-- Marks -->
+  <line x1="52" y1="55" x2="56" y2="55" stroke="#EC4899" stroke-width="1"/>
+  <line x1="52" y1="65" x2="56" y2="65" stroke="#EC4899" stroke-width="1"/>
+  <line x1="52" y1="75" x2="56" y2="75" stroke="#EC4899" stroke-width="1"/>
+</svg>

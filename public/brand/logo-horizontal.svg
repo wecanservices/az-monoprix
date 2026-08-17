@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 160" fill="none">
+  <!-- Compact pin -->
+  <g transform="translate(0,10)">
+    <path d="M60 0 C 92 0 120 26 120 60 C 120 100 90 140 60 156 C 30 140 0 100 0 60 C 0 26 28 0 60 0 Z" fill="#DC1A28"/>
+    <circle cx="60" cy="60" r="42" fill="#FFFFFF"/>
+    <g transform="translate(60,60) scale(0.5)">
+      <path d="M-45 -8 Q-45 -52 0 -52 Q45 -52 45 -8" stroke="#1B4332" stroke-width="8" stroke-linecap="round" fill="none"/>
+      <g transform="translate(20,-6) rotate(28)"><ellipse cx="0" cy="0" rx="8" ry="32" fill="#E4A960"/></g>
+      <g transform="translate(-2,-8)">
+        <rect x="-6" y="-30" width="12" height="10" rx="1" fill="#7A030A"/>
+        <path d="M-9 -20 Q-9 -14 -12 -8 L-12 20 Q-12 26 -6 26 L6 26 Q12 26 12 20 L12 -8 Q9 -14 9 -20 Z" fill="#B91C1C"/>
+        <rect x="-8" y="0" width="16" height="10" fill="#FEF3C7"/>
+      </g>
+      <g transform="translate(-30,-14) rotate(-18)">
+        <path d="M0 0 Q-8 -14 -18 -10 Q-14 4 0 6 Q-14 12 -20 24 Q-6 22 4 12 Q10 22 20 20 Q14 6 0 4 Q10 -6 12 -22 Q0 -14 0 0 Z" fill="#22C55E"/>
+      </g>
+      <g stroke="#1B4332" stroke-width="5" stroke-linecap="round" fill="none">
+        <path d="M-52 -8 L-46 44 Q-42 52 -34 52 L34 52 Q42 52 46 44 L52 -8 Z"/>
+        <line x1="-52" y1="-8" x2="52" y2="-8"/>
+        <line x1="-50" y1="12" x2="50" y2="12"/>
+        <line x1="-46" y1="32" x2="46" y2="32"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- Wordmark -->
+  <g transform="translate(160,0)" font-family="'Inter','SF Pro Display',sans-serif">
+    <text x="0"  y="82" font-weight="800" font-size="72" fill="#1B4332" letter-spacing="-1.5">A</text>
+    <text x="52" y="82" font-weight="800" font-size="72" fill="#DC1A28" letter-spacing="-1.5">Z</text>
+    <text x="118" y="82" font-weight="700" font-size="42" fill="#101418" letter-spacing="1">Monoprix</text>
+    <text x="118" y="112" font-weight="500" font-size="12" fill="#4B5563" letter-spacing="2">QUALITÉ · CHOIX · PRIX JUSTES</text>
+  </g>
+</svg>
