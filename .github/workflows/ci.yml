@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Quality gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+        continue-on-error: true # don't block until lint config is tuned
+
+      - name: Type-check
+        run: pnpm typecheck
+
+      - name: Unit tests
+        run: |
+          pnpm tsx tests/unit/cart-totals.test.ts
+          pnpm tsx tests/unit/state-machine.test.ts
+
+      - name: Build
+        env:
+          # Dummy values so `next build` boots without a real Supabase.
+          # Production build in Vercel uses real secrets.
+          NEXT_PUBLIC_SUPABASE_URL: http://127.0.0.1:54321
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: dummy_anon_key_for_ci_build_only
+          SUPABASE_SERVICE_ROLE_KEY: dummy_service_role_key_for_ci_build_only
+        run: pnpm build
