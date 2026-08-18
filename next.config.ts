@@ -15,6 +15,10 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "images.openfoodfacts.org" },
       { protocol: "https", hostname: "world.openfoodfacts.org" },
       { protocol: "https", hostname: "static.openfoodfacts.org" },
+      // Unsplash — photos de catégories & bannières (image_url en DB)
+      { protocol: "https", hostname: "images.unsplash.com" },
+      // Permission dynamique — camera nécessaire pour le scanner code-barre
+      // (surcharge ci-dessus qui met camera=() ferme la caméra)
     ],
   },
   async headers() {
@@ -29,7 +33,7 @@ const nextConfig: NextConfig = {
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           { key: "X-DNS-Prefetch-Control", value: "off" },
-          { key: "Permissions-Policy", value: "geolocation=(self), camera=(), microphone=()" },
+          { key: "Permissions-Policy", value: "geolocation=(self), camera=(self), microphone=()" },
           {
             key: "Strict-Transport-Security",
             value: "max-age=63072000; includeSubDomains; preload",
