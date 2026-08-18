@@ -215,19 +215,21 @@ export function ScanClient() {
         {/* Idle — bouton de démarrage (obligatoire pour iOS Safari) */}
         {status === "idle" && (
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 p-6 text-center">
-            <Camera className="w-16 h-16 text-white/40" />
-            <p className="text-base text-white/80 max-w-xs">
+            <div className="grid place-items-center w-20 h-20 rounded-full bg-white/8 border border-white/12 backdrop-blur-md az-pulse-soft">
+              <Camera className="w-9 h-9 text-white/70" strokeWidth={1.6} />
+            </div>
+            <p className="text-base text-white/85 max-w-xs leading-relaxed">
               Autorise l&apos;accès à ta caméra pour scanner le code-barre d&apos;un produit
             </p>
             <button
               onClick={startScanner}
-              className="az-btn-primary h-12 px-8 text-sm rounded-full inline-flex items-center gap-2"
+              className="az-btn-primary h-12 px-8"
             >
               <Camera className="w-4 h-4" /> Ouvrir la caméra
             </button>
             <button
               onClick={() => setStatus("manual")}
-              className="text-xs text-white/60 underline underline-offset-4"
+              className="text-xs text-white/60 underline underline-offset-4 hover:text-white/90 transition-colors"
             >
               Ou saisir un code manuellement
             </button>

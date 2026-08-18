@@ -35,8 +35,9 @@ export function CartItemRow({ item }: { item: CartItem }) {
         className="shrink-0"
       >
         <ProductImage
-          src={item.product?.images?.[0]}
-          alt={item.product?.name_fr ?? ""}
+          productName={item.product?.name_fr ?? ""}
+          sku={item.product?.sku}
+          images={item.product?.images}
           className="w-16 h-16 rounded-xl"
           sizes="64px"
         />

@@ -43,11 +43,12 @@ export default async function ProductPage({
     <main className="pb-32">
       <div className="relative">
         <ProductImage
-          src={product.images[0]}
-          alt={product.name_fr}
-          fallbackEmoji={product.category?.icon}
+          productName={product.name_fr}
+          sku={product.sku}
+          images={product.images}
           className="w-full aspect-square"
           sizes="100vw"
+          priority
         />
         <Link
           href="/client/home"

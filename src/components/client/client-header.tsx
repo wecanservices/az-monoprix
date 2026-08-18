@@ -8,7 +8,7 @@ export async function ClientHeader({ location }: { location?: string }) {
   const t = await getTranslations("client.home");
 
   return (
-    <header className="sticky top-0 z-20 az-glass border-b border-[var(--color-border)]">
+    <header className="sticky top-0 z-20 az-glass-strong border-b border-[var(--color-border-subtle)]">
       <div className="mx-auto max-w-3xl px-4 pt-3 pb-2 flex items-center justify-between gap-3">
         <Logo size="sm" />
         <div className="flex items-center gap-1">
@@ -16,30 +16,36 @@ export async function ClientHeader({ location }: { location?: string }) {
         </div>
       </div>
 
-      <div className="mx-auto max-w-3xl px-4 pb-2 flex items-center gap-1.5 text-xs">
-        <span className="inline-flex items-center gap-1 rounded-full bg-[var(--color-az-red-50)] text-[var(--color-az-red-700)] px-2 py-1 font-semibold">
-          <MapPin className="w-3 h-3" />
+      <div className="mx-auto max-w-3xl px-4 pb-2.5 flex items-center gap-2 text-xs">
+        <span className="az-location-chip">
+          <MapPin className="w-3 h-3" strokeWidth={2.4} />
           {location ?? "Lakhdaria, Bouira"}
         </span>
-        <span className="text-[var(--color-foreground-muted)]">·</span>
-        <span className="text-[var(--color-foreground-muted)]">Livraison en 2h</span>
+        <span className="text-[var(--color-foreground-subtle)]">·</span>
+        <span className="text-[var(--color-foreground-muted)] font-medium">
+          Livraison en 2h
+        </span>
       </div>
 
       <div className="mx-auto max-w-3xl px-4 pb-3 flex items-center gap-2">
         <Link
           href="/client/search"
-          className="flex-1 flex items-center gap-2 h-11 px-3 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] text-sm text-[var(--color-foreground-muted)] shadow-[var(--shadow-xs)] hover:border-[var(--color-primary)]/40 hover:shadow-[var(--shadow-sm)] transition-all"
+          className="az-search-bar flex-1 group"
         >
-          <Search className="w-4 h-4 text-[var(--color-primary)]" />
-          <span className="flex-1">{t("searchPlaceholder")}</span>
-          <kbd className="hidden sm:inline text-[10px] text-[var(--color-foreground-muted)] font-mono px-1.5 py-0.5 rounded bg-[var(--color-surface-muted)] border border-[var(--color-border)]">⌘K</kbd>
+          <Search className="w-4 h-4 text-[var(--color-primary)] shrink-0" strokeWidth={2.4} />
+          <span className="flex-1 truncate text-[var(--color-foreground-muted)] group-hover:text-[var(--color-foreground)] transition-colors">
+            {t("searchPlaceholder")}
+          </span>
+          <kbd className="hidden sm:inline text-[10px] text-[var(--color-foreground-muted)] font-mono px-1.5 py-0.5 rounded-md bg-[var(--color-surface-muted)] border border-[var(--color-border)]">
+            ⌘K
+          </kbd>
         </Link>
         <Link
           href="/client/scan"
           aria-label="Scanner un code-barre"
-          className="shrink-0 w-11 h-11 rounded-2xl bg-[var(--color-primary)] text-white grid place-items-center shadow-[var(--shadow-sm)] hover:brightness-105 active:scale-95 transition"
+          className="az-btn-icon-primary shrink-0 h-12 w-12"
         >
-          <ScanLine className="w-5 h-5" />
+          <ScanLine className="w-5 h-5" strokeWidth={2.2} />
         </Link>
       </div>
     </header>

@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 /**
  * Compact add-to-cart button.
- * - Idle : "+" icon
+ * - Idle : "+" icon avec glow rouge et scale au hover
  * - After first click : shows current qty with +/- controls
  * Local optimistic state + POSTs to /api/v1/cart/items.
  * The full cart page always re-fetches from server for authoritative state.
@@ -48,16 +48,20 @@ export function AddToCartButton({
     return (
       <button
         type="button"
-        onClick={() => push(1)}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          push(1);
+        }}
         disabled={busy}
         className={cn(
-          "inline-flex items-center justify-center gap-1.5 rounded-full bg-[var(--gradient-hero)] text-[var(--color-primary-foreground)] font-semibold shadow-[var(--shadow-glow-red)] transition-all duration-[var(--duration-fast)] hover:scale-105 active:scale-95",
-          compact ? "h-8 w-8" : "h-10 px-4 text-sm",
+          "az-btn-icon-primary relative",
+          compact ? "!h-9 !w-9" : "!h-11 px-5 text-sm !w-auto rounded-full inline-flex items-center gap-2",
         )}
         aria-label="Ajouter au panier"
       >
         {compact ? (
-          <Plus className="w-4 h-4" strokeWidth={2.8} />
+          <Plus className="w-[18px] h-[18px]" strokeWidth={2.8} />
         ) : (
           <>
             <ShoppingCart className="w-4 h-4" />
@@ -71,27 +75,36 @@ export function AddToCartButton({
   return (
     <div
       className={cn(
-        "inline-flex items-center rounded-full bg-[var(--color-primary)] text-[var(--color-primary-foreground)] overflow-hidden",
-        compact ? "h-8" : "h-9",
+        "inline-flex items-center rounded-full bg-[var(--gradient-cta)] text-white overflow-hidden shadow-[var(--shadow-glow-red)]",
+        compact ? "h-9" : "h-11",
       )}
+      style={{ background: "var(--gradient-cta)" }}
     >
       <button
         type="button"
-        onClick={() => push(-1)}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          push(-1);
+        }}
         disabled={busy}
-        className="w-8 h-full grid place-items-center hover:bg-black/15"
+        className="w-9 h-full grid place-items-center hover:bg-black/15 transition-colors"
         aria-label="Retirer un"
       >
         <Minus className="w-4 h-4" strokeWidth={2.6} />
       </button>
-      <span className="w-6 text-center text-sm font-semibold tabular-nums">
+      <span className="w-7 text-center text-sm font-bold tabular-nums">
         {confirmed ? <Check className="w-4 h-4 inline" /> : qty}
       </span>
       <button
         type="button"
-        onClick={() => push(1)}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          push(1);
+        }}
         disabled={busy}
-        className="w-8 h-full grid place-items-center hover:bg-black/15"
+        className="w-9 h-full grid place-items-center hover:bg-black/15 transition-colors"
         aria-label="Ajouter un"
       >
         <Plus className="w-4 h-4" strokeWidth={2.6} />

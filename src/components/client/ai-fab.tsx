@@ -13,16 +13,24 @@ export function AiFab() {
       href="/client/ai-shopping"
       aria-label="Assistant IA courses"
       className="
-        fixed bottom-20 right-4 z-30
+        fixed bottom-24 right-4 z-30
         h-14 pl-4 pr-5 rounded-full
-        flex items-center gap-2
-        bg-[var(--gradient-hero)] text-white
-        shadow-[var(--shadow-glow-red)]
-        hover:brightness-110 active:scale-95 transition
+        inline-flex items-center gap-2
+        text-white text-sm font-semibold
+        border border-white/10
+        shadow-[var(--shadow-glow-red-lg)]
+        motion-safe:transition-transform motion-safe:duration-[var(--duration-base)]
+        hover:-translate-y-0.5 active:scale-95
       "
+      style={{
+        background: "var(--gradient-cta)",
+        boxShadow: "var(--shadow-glow-red-lg), inset 0 1px 0 0 rgb(255 255 255 / 0.18)",
+      }}
     >
-      <Sparkles className="w-5 h-5" />
-      <span className="text-sm font-semibold whitespace-nowrap">Assistant IA</span>
+      <span className="grid place-items-center w-6 h-6 rounded-full bg-white/20 az-pulse-soft">
+        <Sparkles className="w-3.5 h-3.5" strokeWidth={2.4} />
+      </span>
+      <span className="whitespace-nowrap">Assistant IA</span>
     </Link>
   );
 }

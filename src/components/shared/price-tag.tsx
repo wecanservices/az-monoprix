@@ -20,32 +20,55 @@ export function PriceTag({
 }) {
   const effective = promoPrice ?? price;
   const hasPromo = promoPrice != null && promoPrice < price;
-  const percent = hasPromo ? Math.round(((price - promoPrice!) / price) * 100) : 0;
 
-  const cls =
+  const priceCls =
     size === "lg"
-      ? "text-2xl font-bold"
+      ? "text-[26px] font-black leading-none"
       : size === "sm"
-      ? "text-sm font-semibold"
-      : "text-base font-semibold";
+      ? "text-[15px] font-black leading-none"
+      : "text-[18px] font-black leading-none";
+
+  const oldCls =
+    size === "lg"
+      ? "text-sm"
+      : size === "sm"
+      ? "text-[11px]"
+      : "text-xs";
 
   return (
-    <div className={cn("flex flex-wrap items-baseline gap-1.5", className)}>
-      <span className={cn(cls, hasPromo && "text-[var(--color-az-promo)]")}>
-        {formatDZD(effective)}
-      </span>
+    <div className={cn("flex flex-col gap-0.5", className)}>
+      <div className="flex items-baseline gap-1.5">
+        <span
+          className={cn(
+            priceCls,
+            "tabular-nums tracking-tight",
+            hasPromo
+              ? "text-[var(--color-az-promo)]"
+              : "text-[var(--color-foreground)]",
+          )}
+        >
+          {formatDZD(effective)}
+        </span>
+      </div>
       {hasPromo && (
-        <>
-          <span className="text-xs text-[var(--color-foreground-muted)] line-through">
+        <div className="flex items-baseline gap-1.5">
+          <span
+            className={cn(
+              oldCls,
+              "text-[var(--color-foreground-subtle)] line-through decoration-[var(--color-foreground-subtle)]/60 tabular-nums",
+            )}
+          >
             {formatDZD(price)}
           </span>
-          <span className="text-[10px] font-bold uppercase text-[var(--color-az-promo)]">
-            -{percent}%
-          </span>
-        </>
+          {unit && (
+            <span className="text-[10px] text-[var(--color-foreground-subtle)]">
+              / {unit}
+            </span>
+          )}
+        </div>
       )}
-      {unit && (
-        <span className="text-[11px] text-[var(--color-foreground-muted)]">
+      {!hasPromo && unit && (
+        <span className="text-[10px] text-[var(--color-foreground-subtle)]">
           / {unit}
         </span>
       )}

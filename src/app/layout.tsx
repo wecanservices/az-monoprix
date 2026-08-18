@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Inter } from "next/font/google";
+import { Inter, Fraunces } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getLocale } from "next-intl/server";
 import { isRtl, type Locale } from "@/lib/i18n/config";
@@ -10,6 +10,17 @@ const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
+  weight: ["400", "500", "600", "700", "800", "900"],
+});
+
+// Serif accent — used sparingly for premium display touches (.az-display-serif)
+// Variable font : on n'utilise ni `weight` ni `style` — Fraunces est
+// entièrement variable (poids + italique + opsz axis).
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  display: "swap",
+  axes: ["opsz"],
 });
 
 export const metadata: Metadata = {
@@ -39,7 +50,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   const dir = isRtl(locale) ? "rtl" : "ltr";
 
   return (
-    <html lang={locale} dir={dir} className={`${inter.variable} h-full antialiased`}>
+    <html lang={locale} dir={dir} className={`${inter.variable} ${fraunces.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-[var(--color-surface-muted)]">
         <NextIntlClientProvider locale={locale} messages={messages}>
           {children}
