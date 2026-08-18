@@ -62,32 +62,49 @@ export default async function ClientHomePage() {
       </div>
       <ClientHeader />
 
-      <main className="mx-auto max-w-3xl px-4 pb-28 pt-4 space-y-8 az-mesh">
+      <main className="mx-auto max-w-3xl px-4 pb-28 pt-5 space-y-9 az-mesh">
         {/* Greeting + trust tiles */}
-        <section className="space-y-4 az-fade-in">
+        <section className="space-y-5 az-fade-in-up">
           <div>
-            <h1 className="text-2xl font-black tracking-tight">
+            <h1 className="text-[28px] font-black tracking-[-0.03em] leading-[1.1] text-[var(--color-foreground)]">
               {t("hello")}
-              {session?.full_name ? `, ${session.full_name.split(" ")[0]}` : " 👋"}
+              {session?.full_name ? (
+                <>
+                  , <span className="az-display-serif text-[var(--color-primary)]">{session.full_name.split(" ")[0]}</span>
+                </>
+              ) : (
+                " 👋"
+              )}
             </h1>
-            <p className="text-sm text-[var(--color-foreground-muted)] mt-0.5">
-              Vos courses, livrées à Lakhdaria en <strong className="text-[var(--color-foreground)]">2 heures</strong>.
+            <p className="text-sm text-[var(--color-foreground-muted)] mt-1.5 leading-relaxed">
+              Vos courses, livrées à Lakhdaria en{" "}
+              <strong className="text-[var(--color-foreground)] font-bold">2 heures</strong>.
             </p>
           </div>
 
-          <div className="grid grid-cols-4 gap-2">
-            {TRUST_TILES.map((tt) => (
-              <div key={tt.title} className="rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] p-2 text-center">
-                <tt.icon className="w-4 h-4 mx-auto text-[var(--color-primary)]" />
-                <div className="text-[10px] font-bold mt-1 leading-tight">{tt.title}</div>
-                <div className="text-[9px] text-[var(--color-foreground-muted)] leading-tight">{tt.desc}</div>
+          <div className="grid grid-cols-4 gap-2.5">
+            {TRUST_TILES.map((tt, i) => (
+              <div
+                key={tt.title}
+                className="az-trust-tile az-fade-in-up"
+                style={{ animationDelay: `${100 + i * 60}ms` }}
+              >
+                <span className="az-trust-tile-icon">
+                  <tt.icon className="w-[15px] h-[15px]" strokeWidth={2.2} />
+                </span>
+                <div className="text-[11px] font-bold leading-tight text-[var(--color-foreground)]">
+                  {tt.title}
+                </div>
+                <div className="text-[9px] text-[var(--color-foreground-muted)] leading-tight">
+                  {tt.desc}
+                </div>
               </div>
             ))}
           </div>
         </section>
 
         {/* Hero carousel */}
-        <section className="az-fade-in">
+        <section className="az-fade-in-up" style={{ animationDelay: "200ms" }}>
           <HeroCarousel slides={HERO_SLIDES} />
         </section>
 
@@ -160,19 +177,30 @@ export default async function ClientHomePage() {
           </section>
         )}
 
-        {/* Foot band CTA */}
-        <section className="rounded-2xl overflow-hidden border border-[var(--color-border)] bg-[var(--color-surface)] p-5 flex items-center gap-4">
-          <div className="w-12 h-12 rounded-2xl bg-[var(--gradient-hero)] grid place-items-center shrink-0 shadow-[var(--shadow-glow-red)]">
-            <Sparkles className="w-6 h-6 text-white" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="font-bold">Vous ne savez pas quoi acheter ?</div>
-            <div className="text-xs text-[var(--color-foreground-muted)]">
-              Décrivez votre besoin, l'assistant IA prépare votre panier.
+        {/* Foot band CTA — Assistant IA */}
+        <section className="az-cta-banner az-fade-in-up flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <div className="flex items-start gap-4 flex-1 min-w-0">
+            <div className="w-12 h-12 rounded-[16px] bg-white/15 backdrop-blur-sm grid place-items-center shrink-0 shadow-inner border border-white/20 az-pulse-soft">
+              <Sparkles className="w-6 h-6 text-white" strokeWidth={2.2} />
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="text-[10px] font-black uppercase tracking-[0.18em] text-white/70 mb-0.5">
+                Assistant IA
+              </div>
+              <div className="font-bold text-[15px] leading-tight text-white">
+                Vous ne savez pas quoi acheter&nbsp;?
+              </div>
+              <div className="text-[12px] text-white/80 leading-snug mt-0.5">
+                Décrivez votre besoin, l&apos;IA prépare votre panier.
+              </div>
             </div>
           </div>
-          <Link href="/client/ai-shopping" className="az-btn-primary text-sm shrink-0 whitespace-nowrap">
+          <Link
+            href="/client/ai-shopping"
+            className="shrink-0 self-stretch sm:self-auto inline-flex items-center justify-center gap-1.5 rounded-full bg-white text-[var(--color-primary)] font-bold text-sm px-5 h-11 shadow-[0_8px_20px_-4px_rgb(0_0_0/0.25)] hover:scale-[1.03] active:scale-95 motion-safe:transition-transform"
+          >
             Essayer
+            <span aria-hidden>→</span>
           </Link>
         </section>
 

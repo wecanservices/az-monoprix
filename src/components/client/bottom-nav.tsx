@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, Grid3x3, ShoppingCart, ClipboardList, User } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { cn } from "@/lib/utils";
 import { CartBadge } from "./cart-badge";
 
 const ITEMS = [
@@ -20,8 +19,8 @@ export function ClientBottomNav() {
   const path = usePathname();
 
   return (
-    <nav className="sticky bottom-0 z-30 border-t border-[var(--color-border)] bg-[var(--color-surface)]/95 backdrop-blur">
-      <ul className="grid grid-cols-5">
+    <nav className="az-bottom-nav">
+      <ul className="mx-auto max-w-3xl grid grid-cols-5 gap-1">
         {ITEMS.map(({ href, icon: Icon, key, badge }) => {
           const active =
             path === href || (href !== "/" && path.startsWith(href));
@@ -29,15 +28,12 @@ export function ClientBottomNav() {
             <li key={href}>
               <Link
                 href={href}
-                className={cn(
-                  "flex flex-col items-center gap-1 py-2.5 text-[11px] font-medium transition",
-                  active
-                    ? "text-[var(--color-primary)]"
-                    : "text-[var(--color-foreground-muted)] hover:text-[var(--color-foreground)]"
-                )}
+                data-active={active}
+                className="az-nav-item"
+                aria-current={active ? "page" : undefined}
               >
-                <span className="relative">
-                  <Icon className="w-5 h-5" strokeWidth={active ? 2.4 : 1.8} />
+                <span className="az-nav-icon-wrap relative">
+                  <Icon className="w-6 h-6" strokeWidth={active ? 2.4 : 1.8} />
                   {badge && <CartBadge />}
                 </span>
                 {t(key)}

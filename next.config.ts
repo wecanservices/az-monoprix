@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
       // Supabase Storage (local + prod). Precise host is checked at runtime.
       { protocol: "http", hostname: "127.0.0.1", port: "54321" },
       { protocol: "https", hostname: "*.supabase.co" },
+      // Open Food Facts — photos enrichies via `scripts/enrich-photos.ts`
+      { protocol: "https", hostname: "images.openfoodfacts.org" },
+      { protocol: "https", hostname: "world.openfoodfacts.org" },
+      { protocol: "https", hostname: "static.openfoodfacts.org" },
     ],
   },
   async headers() {

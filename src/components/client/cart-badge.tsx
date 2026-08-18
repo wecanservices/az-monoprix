@@ -31,7 +31,7 @@ export function CartBadge() {
 
   if (!count) return null;
   return (
-    <span className="absolute -top-1 -right-1 grid place-items-center min-w-[16px] h-4 px-1 rounded-full bg-[var(--color-primary)] text-[10px] font-bold text-white">
+    <span className="az-cart-badge">
       {count > 99 ? "99+" : count}
     </span>
   );
