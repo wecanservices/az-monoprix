@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { LogOut, MapPin, Heart, Package, Gift, Bell } from "lucide-react";
+import { LogOut, MapPin, Heart, Package, Gift, Bell, LifeBuoy, Sparkles, ScanLine } from "lucide-react";
 import { requireCustomer } from "@/lib/auth/guards";
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
@@ -16,6 +16,9 @@ const ITEMS = [
   { href: "/client/favorites", icon: Heart, label: "Favoris" },
   { href: "/client/lists", icon: MapPin, label: "Mes adresses" },
   { href: "/client/loyalty", icon: Gift, label: "Programme fidélité" },
+  { href: "/client/scan", icon: ScanLine, label: "Scanner un code-barre" },
+  { href: "/client/ai-shopping", icon: Sparkles, label: "Assistant IA courses" },
+  { href: "/client/chat", icon: LifeBuoy, label: "Aide & Support" },
   { href: "/client/profile/notifications", icon: Bell, label: "Notifications" },
 ];
 

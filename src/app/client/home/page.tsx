@@ -9,6 +9,7 @@ import { CategoryChip } from "@/components/shared/category-chip";
 import { HeroCarousel } from "@/components/shared/hero-carousel";
 import { ProductCard } from "@/components/client/product-card";
 import { ClientFooter } from "@/components/client/footer";
+import { AiFab } from "@/components/client/ai-fab";
 import { getSession } from "@/lib/auth/session";
 import { createReadServerClient } from "@/lib/supabase/anon-server";
 import { listCategories, listProducts } from "@/services/products";
@@ -177,6 +178,7 @@ export default async function ClientHomePage() {
 
         <ClientFooter />
       </main>
+      <AiFab />
     </>
   );
 }
