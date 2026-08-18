@@ -63,3 +63,7 @@ yarn-error.log*
 
 # Claude / Cursor tooling (personnel)
 .cursor/
+
+# Cloud env (Supabase Cloud credentials — NEVER commit)
+.env.cloud
+.env.cloud.*

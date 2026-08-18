@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MapPin, Search, Menu } from "lucide-react";
+import { MapPin, Search, ScanLine } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Logo } from "@/components/shared/logo";
 import { NotificationBell } from "@/components/client/notification-bell";
@@ -25,14 +25,21 @@ export async function ClientHeader({ location }: { location?: string }) {
         <span className="text-[var(--color-foreground-muted)]">Livraison en 2h</span>
       </div>
 
-      <div className="mx-auto max-w-3xl px-4 pb-3">
+      <div className="mx-auto max-w-3xl px-4 pb-3 flex items-center gap-2">
         <Link
           href="/client/search"
-          className="flex items-center gap-2 h-11 px-3 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] text-sm text-[var(--color-foreground-muted)] shadow-[var(--shadow-xs)] hover:border-[var(--color-primary)]/40 hover:shadow-[var(--shadow-sm)] transition-all"
+          className="flex-1 flex items-center gap-2 h-11 px-3 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] text-sm text-[var(--color-foreground-muted)] shadow-[var(--shadow-xs)] hover:border-[var(--color-primary)]/40 hover:shadow-[var(--shadow-sm)] transition-all"
         >
           <Search className="w-4 h-4 text-[var(--color-primary)]" />
           <span className="flex-1">{t("searchPlaceholder")}</span>
           <kbd className="hidden sm:inline text-[10px] text-[var(--color-foreground-muted)] font-mono px-1.5 py-0.5 rounded bg-[var(--color-surface-muted)] border border-[var(--color-border)]">⌘K</kbd>
+        </Link>
+        <Link
+          href="/client/scan"
+          aria-label="Scanner un code-barre"
+          className="shrink-0 w-11 h-11 rounded-2xl bg-[var(--color-primary)] text-white grid place-items-center shadow-[var(--shadow-sm)] hover:brightness-105 active:scale-95 transition"
+        >
+          <ScanLine className="w-5 h-5" />
         </Link>
       </div>
     </header>

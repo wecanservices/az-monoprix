@@ -14,7 +14,8 @@
     "db:reset": "supabase db reset",
     "db:migrate": "supabase migration up",
     "db:types": "supabase gen types typescript --local > src/types/database.types.ts",
-    "db:seed": "supabase db reset && tsx supabase/seed/index.ts"
+    "db:seed": "supabase db reset && tsx supabase/seed/index.ts",
+    "import:monoprix": "tsx scripts/import-monoprix-products.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.5.1",
@@ -35,6 +36,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^17.4.2",
     "eslint": "^9",
     "eslint-config-next": "16.3.1",
     "tailwindcss": "^4",
