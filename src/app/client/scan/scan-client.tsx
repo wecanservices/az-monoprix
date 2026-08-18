@@ -4,38 +4,64 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Camera, Keyboard, Loader2, ScanLine } from "lucide-react";
+import { BrowserMultiFormatReader } from "@zxing/browser";
+import { BarcodeFormat, DecodeHintType } from "@zxing/library";
 
 /**
- * Composant scanner. Détecte les codes-barres via l'API native
- * `window.BarcodeDetector` — supportée sur Chrome / Edge Android /
- * Samsung Internet / Firefox 116+. Fallback : input manuel.
+ * Scanner code-barre.
+ *
+ * Deux moteurs de décodage, choisis dans cet ordre :
+ *   1. `BarcodeDetector` natif  — Chrome/Edge Android, Samsung Internet, Firefox 116+
+ *   2. `@zxing/browser`         — fallback JS pur pour Safari iPhone / tout le reste
+ *
+ * L'ouverture de la caméra est déclenchée par un tap utilisateur explicite
+ * (iOS Safari refuse `getUserMedia` hors user gesture).
  */
 
-// Formats les plus courants en supermarché
-const BARCODE_FORMATS = ["ean_13", "ean_8", "upc_a", "upc_e", "code_128"];
+const FORMATS = ["ean_13", "ean_8", "upc_a", "upc_e", "code_128", "code_39"];
 
-// Type minimal pour BarcodeDetector (pas dans lib.dom)
+const ZXING_HINTS = new Map<DecodeHintType, unknown>([
+  [
+    DecodeHintType.POSSIBLE_FORMATS,
+    [
+      BarcodeFormat.EAN_13,
+      BarcodeFormat.EAN_8,
+      BarcodeFormat.UPC_A,
+      BarcodeFormat.UPC_E,
+      BarcodeFormat.CODE_128,
+      BarcodeFormat.CODE_39,
+    ],
+  ],
+  [DecodeHintType.TRY_HARDER, true],
+]);
+
+// BarcodeDetector typing (absent de lib.dom)
 type BarcodeDetectorLike = {
-  detect: (source: CanvasImageSource) => Promise<Array<{ rawValue: string; format: string }>>;
+  detect: (s: CanvasImageSource) => Promise<Array<{ rawValue: string; format: string }>>;
 };
-type BarcodeDetectorCtor = new (opts?: { formats?: string[] }) => BarcodeDetectorLike;
+type BarcodeDetectorCtor = new (o?: { formats?: string[] }) => BarcodeDetectorLike;
+
+type Status = "idle" | "starting" | "scanning" | "manual" | "lookup" | "notfound" | "error";
 
 export function ScanClient() {
   const router = useRouter();
   const videoRef = useRef<HTMLVideoElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
-  const detectorRef = useRef<BarcodeDetectorLike | null>(null);
+  const zxingCtrlRef = useRef<{ stop: () => void } | null>(null);
   const rafRef = useRef<number | null>(null);
-  const lockRef = useRef(false); // évite les doubles lectures
+  const lockRef = useRef(false);
 
-  const [status, setStatus] = useState<"idle" | "camera" | "manual" | "lookup" | "notfound" | "error">("idle");
+  const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [manualCode, setManualCode] = useState("");
   const [lastCode, setLastCode] = useState<string | null>(null);
+  const [engine, setEngine] = useState<"native" | "zxing" | null>(null);
 
   const stopCamera = useCallback(() => {
     if (rafRef.current) cancelAnimationFrame(rafRef.current);
     rafRef.current = null;
+    zxingCtrlRef.current?.stop();
+    zxingCtrlRef.current = null;
     streamRef.current?.getTracks().forEach((t) => t.stop());
     streamRef.current = null;
   }, []);
@@ -44,10 +70,11 @@ export function ScanClient() {
     async (code: string) => {
       if (lockRef.current) return;
       lockRef.current = true;
-      setLastCode(code);
+      const clean = code.replace(/\D/g, "");
+      setLastCode(clean);
       setStatus("lookup");
       try {
-        const res = await fetch(`/api/v1/client/scan?code=${encodeURIComponent(code)}`);
+        const res = await fetch(`/api/v1/client/scan?code=${encodeURIComponent(clean)}`);
         const json = (await res.json()) as {
           data: { productId: string } | null;
           error: { code: string; message: string } | null;
@@ -60,7 +87,7 @@ export function ScanClient() {
         setStatus("notfound");
         setTimeout(() => {
           lockRef.current = false;
-          setStatus("camera");
+          setStatus("scanning");
         }, 1500);
       } catch (e) {
         setErrorMsg(e instanceof Error ? e.message : "Erreur réseau");
@@ -71,32 +98,55 @@ export function ScanClient() {
     [router, stopCamera],
   );
 
-  const startCamera = useCallback(async () => {
+  const startScanner = useCallback(async () => {
     setErrorMsg(null);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const Ctor = (window as any).BarcodeDetector as BarcodeDetectorCtor | undefined;
-    if (!Ctor) {
-      setStatus("manual");
-      setErrorMsg("Scanner non supporté par ce navigateur — utilise Chrome sur Android, ou saisis le code.");
-      return;
-    }
+    setStatus("starting");
+
+    // 1. Ouvrir la caméra arrière
+    let stream: MediaStream;
     try {
-      detectorRef.current = new Ctor({ formats: BARCODE_FORMATS });
-      const stream = await navigator.mediaDevices.getUserMedia({
+      stream = await navigator.mediaDevices.getUserMedia({
         video: { facingMode: { ideal: "environment" }, width: { ideal: 1280 } },
         audio: false,
       });
-      streamRef.current = stream;
-      const video = videoRef.current;
-      if (!video) return;
-      video.srcObject = stream;
-      await video.play();
-      setStatus("camera");
+    } catch (e) {
+      setErrorMsg(
+        e instanceof Error
+          ? e.name === "NotAllowedError"
+            ? "Accès caméra refusé. Autorise-le dans les réglages du navigateur."
+            : e.name === "NotFoundError"
+              ? "Aucune caméra trouvée sur ton appareil."
+              : e.message
+          : "Impossible d'ouvrir la caméra",
+      );
+      setStatus("error");
+      return;
+    }
+    streamRef.current = stream;
 
+    const video = videoRef.current;
+    if (!video) return;
+    video.srcObject = stream;
+    // iOS Safari : nécessite ces attributs + play() sous user gesture
+    video.setAttribute("playsinline", "true");
+    video.muted = true;
+    try {
+      await video.play();
+    } catch {
+      /* play retriggered on user tap fallback */
+    }
+    setStatus("scanning");
+
+    // 2. Choisir un moteur — natif d'abord, ZXing sinon
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const Ctor = (window as any).BarcodeDetector as BarcodeDetectorCtor | undefined;
+    if (Ctor) {
+      setEngine("native");
+      const det = new Ctor({ formats: FORMATS });
       const loop = async () => {
-        if (!videoRef.current || !detectorRef.current) return;
+        if (!videoRef.current) return;
         try {
-          const codes = await detectorRef.current.detect(videoRef.current);
+          const codes = await det.detect(videoRef.current);
           if (codes.length > 0) {
             const raw = codes[0].rawValue.replace(/\D/g, "");
             if (raw.length >= 8) {
@@ -110,22 +160,21 @@ export function ScanClient() {
         rafRef.current = requestAnimationFrame(loop);
       };
       loop();
-    } catch (e) {
-      setErrorMsg(
-        e instanceof Error
-          ? e.name === "NotAllowedError"
-            ? "Accès caméra refusé. Autorise-le dans les réglages du navigateur."
-            : e.message
-          : "Impossible d'ouvrir la caméra",
-      );
-      setStatus("error");
+    } else {
+      setEngine("zxing");
+      const reader = new BrowserMultiFormatReader(ZXING_HINTS, { delayBetweenScanAttempts: 250 });
+      const ctrl = await reader.decodeFromVideoElement(video, (result) => {
+        if (!result) return;
+        const raw = result.getText().replace(/\D/g, "");
+        if (raw.length >= 8) void handleCode(raw);
+      });
+      zxingCtrlRef.current = ctrl;
     }
   }, [handleCode]);
 
   useEffect(() => {
-    startCamera();
     return () => stopCamera();
-  }, [startCamera, stopCamera]);
+  }, [stopCamera]);
 
   return (
     <main className="min-h-svh bg-black text-white flex flex-col">
@@ -163,8 +212,38 @@ export function ScanClient() {
           />
         )}
 
-        {/* Overlay avec cible */}
-        {(status === "camera" || status === "lookup" || status === "notfound") && (
+        {/* Idle — bouton de démarrage (obligatoire pour iOS Safari) */}
+        {status === "idle" && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 p-6 text-center">
+            <Camera className="w-16 h-16 text-white/40" />
+            <p className="text-base text-white/80 max-w-xs">
+              Autorise l&apos;accès à ta caméra pour scanner le code-barre d&apos;un produit
+            </p>
+            <button
+              onClick={startScanner}
+              className="az-btn-primary h-12 px-8 text-sm rounded-full inline-flex items-center gap-2"
+            >
+              <Camera className="w-4 h-4" /> Ouvrir la caméra
+            </button>
+            <button
+              onClick={() => setStatus("manual")}
+              className="text-xs text-white/60 underline underline-offset-4"
+            >
+              Ou saisir un code manuellement
+            </button>
+          </div>
+        )}
+
+        {status === "starting" && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/70">
+            <div className="flex items-center gap-2 text-sm">
+              <Loader2 className="w-5 h-5 animate-spin" /> Démarrage de la caméra…
+            </div>
+          </div>
+        )}
+
+        {/* Overlay cible */}
+        {(status === "scanning" || status === "lookup" || status === "notfound") && (
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute inset-0 bg-black/40" />
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-44 max-w-[80vw]">
@@ -174,6 +253,9 @@ export function ScanClient() {
             </div>
             <p className="absolute left-0 right-0 top-[calc(50%+120px)] text-center text-sm text-white/80 px-6">
               Alignez le code-barre dans le cadre
+              {engine === "zxing" && (
+                <span className="block text-[10px] text-white/40 mt-1">Moteur ZXing</span>
+              )}
             </p>
           </div>
         )}
@@ -213,27 +295,34 @@ export function ScanClient() {
                 type="button"
                 onClick={() => {
                   setStatus("idle");
-                  startCamera();
                 }}
                 className="w-full text-sm text-[var(--color-foreground-muted)] flex items-center justify-center gap-2"
               >
-                <Camera className="w-4 h-4" /> Réessayer la caméra
+                <Camera className="w-4 h-4" /> Retour au scanner caméra
               </button>
             </form>
           </div>
         )}
 
-        {/* Erreur */}
+        {/* Erreur caméra */}
         {status === "error" && (
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6 text-center bg-[var(--color-background)] text-[var(--color-foreground)]">
-            <p className="text-sm text-[var(--color-az-danger)]">{errorMsg}</p>
-            <button onClick={() => setStatus("manual")} className="az-btn-primary">
-              Saisir le code
-            </button>
+            <p className="text-sm text-[var(--color-az-danger)] max-w-xs">{errorMsg}</p>
+            <div className="flex gap-3">
+              <button
+                onClick={() => setStatus("idle")}
+                className="h-11 px-5 rounded-full border border-[var(--color-border)] text-sm"
+              >
+                Réessayer
+              </button>
+              <button onClick={() => setStatus("manual")} className="az-btn-primary h-11 px-5 text-sm">
+                Saisir le code
+              </button>
+            </div>
           </div>
         )}
 
-        {/* Overlay chargement / not found */}
+        {/* Overlays lookup / not found */}
         {status === "lookup" && (
           <div className="absolute inset-x-0 bottom-32 flex justify-center">
             <div className="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-full text-sm font-medium shadow-lg">
