@@ -60,7 +60,7 @@ export async function adminGetProduct(
     .from("products")
     .select(
       `
-      id, sku, barcode, name_fr, name_ar, name_en,
+      id, sku, name_fr, name_ar, name_en,
       description_fr, description_ar, description_en,
       category_id, brand_id, base_price, tva_rate,
       unit, unit_size, weight_grams, is_active, is_featured, attributes,
@@ -80,7 +80,6 @@ export async function adminGetProduct(
 export interface ProductUpsertInput {
   id?: string;
   sku: string;
-  barcode?: string | null;
   name_fr: string;
   name_ar?: string | null;
   description_fr?: string | null;

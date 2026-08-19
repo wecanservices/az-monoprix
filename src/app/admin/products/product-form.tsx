@@ -9,7 +9,6 @@ interface Brand { id: string; name: string }
 interface Product {
   id?: string;
   sku?: string;
-  barcode?: string | null;
   name_fr?: string;
   name_ar?: string | null;
   description_fr?: string | null;
@@ -78,11 +77,8 @@ export function ProductForm({
   return (
     <DataCard>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Field label="SKU *">
+        <Field label="SKU *" full>
           <input value={form.sku ?? ""} onChange={(e) => set("sku", e.target.value)} className={inputCls} />
-        </Field>
-        <Field label="Code-barres">
-          <input value={form.barcode ?? ""} onChange={(e) => set("barcode", e.target.value)} className={inputCls} />
         </Field>
         <Field label="Nom (FR) *" full>
           <input value={form.name_fr ?? ""} onChange={(e) => set("name_fr", e.target.value)} className={inputCls} />

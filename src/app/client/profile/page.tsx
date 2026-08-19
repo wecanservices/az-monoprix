@@ -8,7 +8,6 @@ import {
   Bell,
   LifeBuoy,
   Sparkles,
-  ScanLine,
   ChevronRight,
 } from "lucide-react";
 import { requireCustomer } from "@/lib/auth/guards";
@@ -29,7 +28,6 @@ const ITEMS = [
   { href: "/client/orders", icon: Package, label: "Mes commandes" },
   { href: "/client/favorites", icon: Heart, label: "Favoris" },
   { href: "/client/lists", icon: MapPin, label: "Mes adresses" },
-  { href: "/client/scan", icon: ScanLine, label: "Scanner un code-barre" },
   { href: "/client/ai-shopping", icon: Sparkles, label: "Assistant IA courses" },
   { href: "/client/chat", icon: LifeBuoy, label: "Aide & Support" },
   { href: "/client/profile/notifications", icon: Bell, label: "Notifications" },

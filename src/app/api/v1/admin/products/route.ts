@@ -8,7 +8,6 @@ import { ok, fail } from "@/lib/api/response";
 const upsertSchema = z.object({
   id: z.string().uuid().optional(),
   sku: z.string().min(2).max(60),
-  barcode: z.string().optional().nullable(),
   name_fr: z.string().min(1).max(200),
   name_ar: z.string().optional().nullable(),
   description_fr: z.string().optional().nullable(),
