@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MapPin, Search } from "lucide-react";
+import { MapPin, Search, ScanLine } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Logo } from "@/components/shared/logo";
 import { NotificationBell } from "@/components/client/notification-bell";
@@ -39,6 +39,13 @@ export async function ClientHeader({ location }: { location?: string }) {
           <kbd className="hidden sm:inline text-[10px] text-[var(--color-foreground-muted)] font-mono px-1.5 py-0.5 rounded-md bg-[var(--color-surface-muted)] border border-[var(--color-border)]">
             ⌘K
           </kbd>
+        </Link>
+        <Link
+          href="/client/scan"
+          aria-label="Scanner un code-barre"
+          className="az-btn-icon-primary shrink-0 h-12 w-12"
+        >
+          <ScanLine className="w-5 h-5" strokeWidth={2.2} />
         </Link>
       </div>
     </header>
