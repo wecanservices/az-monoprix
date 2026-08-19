@@ -122,32 +122,6 @@ export async function getProductById(
   return mapRow(data, storeId);
 }
 
-/**
- * Lookup produit par code-barre (EAN-13 / UPC / CODE128).
- *
- * Utilisé par le scanner client (`/client/scan`) : le lecteur retourne
- * une chaîne de chiffres → on retrouve le produit + prix du magasin en
- * une seule requête. Retourne null si code inconnu.
- */
-export async function getProductByBarcode(
-  sb: SupabaseClient,
-  barcode: string,
-  storeId: string,
-): Promise<StoreProduct | null> {
-  const clean = barcode.replace(/\D/g, "");
-  if (!clean) return null;
-  const { data, error } = await sb
-    .from("products")
-    .select(PRODUCT_SELECT)
-    .eq("barcode", clean)
-    .eq("store_products.store_id", storeId)
-    .eq("inventory.store_id", storeId)
-    .maybeSingle();
-  if (error) throw error;
-  if (!data) return null;
-  return mapRow(data, storeId);
-}
-
 export async function listCategories(sb: SupabaseClient): Promise<Category[]> {
   const { data, error } = await sb
     .from("categories")

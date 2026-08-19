@@ -3,7 +3,6 @@
  *
  * Wires Gemini tool-calling to real services:
  *   - search_products       → listProducts (search by ILIKE on name_fr)
- *   - get_product_by_barcode
  *   - get_promotions        → listProducts (promotedOnly)
  *   - add_to_cart           → addToCart (source-of-truth price)
  *
@@ -14,7 +13,7 @@
  */
 import "server-only";
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { listProducts, getProductByBarcode } from "@/services/products";
+import { listProducts } from "@/services/products";
 import { addToCart, getOrCreateCart } from "@/services/cart";
 import { DEFAULT_STORE_ID } from "@/services/stores";
 import type {
@@ -37,11 +36,10 @@ export interface ProductCard {
   category: string | null;
 }
 
-export const SYSTEM_PROMPT = `Tu es l'assistant courses AZ Monoprix. Tu aides le client à trouver ses produits parmi les 12 091 références du magasin de Lakhdaria.
+export const SYSTEM_PROMPT = `Tu es l'assistant courses AZ Monoprix. Tu aides le client à trouver ses produits dans le catalogue du magasin de Lakhdaria.
 
 Tu peux :
 - Chercher le catalogue avec search_products
-- Retrouver un produit par code-barre avec get_product_by_barcode
 - Lister les promotions du moment avec get_promotions
 - Ajouter un produit au panier avec add_to_cart (après confirmation implicite du client)
 
@@ -87,18 +85,6 @@ export function buildShoppingTools(
         },
       },
       {
-        name: "get_product_by_barcode",
-        description:
-          "Retrouve un produit à partir de son code-barre (EAN-13 / UPC).",
-        parameters: {
-          type: "object",
-          properties: {
-            barcode: { type: "string", description: "Code-barre numérique" },
-          },
-          required: ["barcode"],
-        },
-      },
-      {
         name: "get_promotions",
         description:
           "Liste les produits actuellement en promotion dans le magasin.",
@@ -115,7 +101,7 @@ export function buildShoppingTools(
       {
         name: "add_to_cart",
         description:
-          "Ajoute un produit au panier du client. Utilise l'UUID `product_id` renvoyé par search_products ou get_product_by_barcode.",
+          "Ajoute un produit au panier du client. Utilise l'UUID `product_id` renvoyé par search_products.",
         parameters: {
           type: "object",
           properties: {
@@ -146,16 +132,6 @@ export function buildShoppingTools(
         const cards = rows.map(rowToCard);
         for (const c of cards) opts.emitProduct(c);
         return { count: cards.length, products: cards };
-      },
-
-      async get_product_by_barcode(args: { barcode?: string }) {
-        const barcode = String(args?.barcode ?? "").trim();
-        if (!barcode) return { error: "barcode requis" };
-        const row = await getProductByBarcode(sb, barcode, opts.storeId);
-        if (!row) return { found: false };
-        const card = rowToCard(row);
-        opts.emitProduct(card);
-        return { found: true, product: card };
       },
 
       async get_promotions(args: { limit?: number }) {

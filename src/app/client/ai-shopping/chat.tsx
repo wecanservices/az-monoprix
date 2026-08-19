@@ -404,7 +404,6 @@ function ToolChip({ tool }: { tool: ToolBubble }) {
 
 const TOOL_LABELS: Record<string, string> = {
   search_products: "Recherche catalogue",
-  get_product_by_barcode: "Lecture code-barre",
   get_promotions: "Promotions du jour",
   add_to_cart: "Ajout au panier",
 };
